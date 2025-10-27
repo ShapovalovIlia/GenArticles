@@ -7,7 +7,6 @@ class Article:
         keywords: list[str],
         text: str,
     ) -> None:
-
         self.url = url
         self.title = title
         self.description = description

@@ -8,7 +8,7 @@ from gen_articles.datamodels import Article, Config
 logger = logging.getLogger(__name__)
 
 
-def get_phrases(path: str, max_phrases: int | None = None) -> list[str]:
+def get_phrases_csv(path: str, max_phrases: int | None = None) -> list[str]:
     if max_phrases:
         df = pd.read_csv(path).head(max_phrases)
     else:
@@ -17,6 +17,21 @@ def get_phrases(path: str, max_phrases: int | None = None) -> list[str]:
     phrases = [str(x) for x in df["Фраза"].dropna().tolist()]
 
     logger.info(f"Считано {len(phrases)} фраз, путь {path}")
+
+    return phrases
+
+
+def get_phrases_txt(path: str, max_phrases: int | None = None) -> list[str]:
+    phrases: list[str] = []
+
+    with open(path, "r", encoding="utf-8") as f:
+        for line in f:
+            phrase = line.strip()
+            if not phrase:
+                continue
+            phrases.append(phrase)
+            if max_phrases is not None and len(phrases) >= max_phrases:
+                break
 
     return phrases
 

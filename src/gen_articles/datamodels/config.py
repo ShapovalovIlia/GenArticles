@@ -1,8 +1,8 @@
 class Config:
     def __init__(
-        self, *, csv_path: str, output_dir: str, system_prompt_path: str
+        self, *, phrases_path: str, output_dir: str, system_prompt_path: str
     ) -> None:
-        self.csv_path = csv_path
+        self.phrases_path = phrases_path
         self.output_dir = output_dir
         self.system_prompt_path = system_prompt_path
 
